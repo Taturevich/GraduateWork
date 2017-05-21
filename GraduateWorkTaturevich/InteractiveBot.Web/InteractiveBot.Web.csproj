@@ -245,6 +245,19 @@
     </Compile>
     <Compile Include="Messages\MessageController.cs" />
     <Compile Include="Messages\MessageModel.cs" />
+    <Compile Include="Migrations\201705210925114_InitialCreate.cs" />
+    <Compile Include="Migrations\201705210925114_InitialCreate.Designer.cs">
+      <DependentUpon>201705210925114_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705211904321_SecondInit.cs" />
+    <Compile Include="Migrations\201705211904321_SecondInit.Designer.cs">
+      <DependentUpon>201705211904321_SecondInit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201705211907295_ThirdInit.cs" />
+    <Compile Include="Migrations\201705211907295_ThirdInit.Designer.cs">
+      <DependentUpon>201705211907295_ThirdInit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -357,6 +370,17 @@
       <Project>{9c87d82c-0e27-4995-a2cb-72bcb84ef2e2}</Project>
       <Name>InteractiveBot.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201705210925114_InitialCreate.resx">
+      <DependentUpon>201705210925114_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705211904321_SecondInit.resx">
+      <DependentUpon>201705211904321_SecondInit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705211907295_ThirdInit.resx">
+      <DependentUpon>201705211907295_ThirdInit.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

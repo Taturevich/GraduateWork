@@ -1,6 +1,5 @@
 ﻿using System.Security.Claims;
 using System.Threading.Tasks;
-using BusinessLogic.Infrastructure;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
