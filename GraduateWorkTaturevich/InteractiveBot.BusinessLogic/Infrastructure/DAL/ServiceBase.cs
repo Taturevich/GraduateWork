@@ -1,9 +1,10 @@
-﻿using System;
+﻿using BusinessLogic.Infrastructure.Injection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace BusinessLogic.Infrastructure
+namespace BusinessLogic.Infrastructure.DAL
 {
     /// <summary>
     /// Base service for data access

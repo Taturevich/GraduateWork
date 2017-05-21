@@ -1,10 +1,10 @@
-﻿using System;
-using Ninject;
-using Ninject.Extensions.Interception;
+﻿using Ninject.Extensions.Interception;
 using Ninject.Extensions.Interception.Attributes;
 using Ninject.Extensions.Interception.Request;
+using System;
+using Ninject;
 
-namespace BusinessLogic.Infrastructure
+namespace BusinessLogic.Infrastructure.DAL
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public sealed class TransactionalAttribute : InterceptAttribute

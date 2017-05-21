@@ -1,3 +1,5 @@
+using BusinessLogic.Infrastructure.DAL;
+
 namespace BusinessLogic.Migrations
 {
     using System;
@@ -5,14 +7,14 @@ namespace BusinessLogic.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<BusinessLogic.Infrastructure.BlDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<BlDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(BusinessLogic.Infrastructure.BlDbContext context)
+        protected override void Seed(BlDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

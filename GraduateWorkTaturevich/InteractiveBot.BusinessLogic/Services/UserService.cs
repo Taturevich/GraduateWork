@@ -2,7 +2,9 @@
 using System.Linq;
 using BusinessLogic.Entities.Infrastructure;
 using BusinessLogic.Enums;
-using BusinessLogic.Infrastructure;
+using BusinessLogic.Infrastructure.DAL;
+using BusinessLogic.Infrastructure.Extensions;
+using BusinessLogic.Infrastructure.Injection;
 
 namespace BusinessLogic.Services
 {

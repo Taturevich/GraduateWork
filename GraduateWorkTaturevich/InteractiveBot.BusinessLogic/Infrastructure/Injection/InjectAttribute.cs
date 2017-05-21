@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BusinessLogic.Infrastructure
+namespace BusinessLogic.Infrastructure.Injection
 {
     [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field)]
     public class InjectAttribute : Attribute

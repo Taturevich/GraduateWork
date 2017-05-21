@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Security.Cryptography;
 
-namespace BusinessLogic.Infrastructure
+namespace BusinessLogic.Infrastructure.Extensions
 {
     public static class PasswordHasher
     {

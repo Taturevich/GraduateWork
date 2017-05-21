@@ -5,7 +5,7 @@ using BusinessLogic.Entities.FactoryDomain;
 using BusinessLogic.Entities.Infrastructure;
 using EventLog = BusinessLogic.Entities.Infrastructure.EventLog;
 
-namespace BusinessLogic.Infrastructure
+namespace BusinessLogic.Infrastructure.DAL
 {
     public class BlDbContext : DbContext
     {

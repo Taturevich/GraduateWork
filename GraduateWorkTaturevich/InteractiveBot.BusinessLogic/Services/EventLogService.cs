@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.Entities;
 using BusinessLogic.Entities.Infrastructure;
 using BusinessLogic.Infrastructure;
+using BusinessLogic.Infrastructure.DAL;
 
 namespace BusinessLogic.Services
 {

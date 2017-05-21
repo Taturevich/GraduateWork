@@ -5,7 +5,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace BusinessLogic.Infrastructure
+namespace BusinessLogic.Infrastructure.DAL
 {
     public interface IRepository<TEntity>
     {

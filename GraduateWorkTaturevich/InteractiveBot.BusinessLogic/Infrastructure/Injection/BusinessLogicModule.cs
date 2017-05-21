@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using BusinessLogic.BotConfiguration.QueryDomainBuilder;
 using BusinessLogic.Entities.FactoryDomain;
+using BusinessLogic.Infrastructure.DAL;
 using Ninject.Extensions.Conventions;
 using Ninject.Modules;
 
-namespace BusinessLogic.Infrastructure
+namespace BusinessLogic.Infrastructure.Injection
 {
     public class BusinessLogicModule : NinjectModule
     {
@@ -14,6 +15,7 @@ namespace BusinessLogic.Infrastructure
             Bind(typeof(IEntityServiceBase<>)).To(typeof(EntityServiceBase<>));
             Bind<BlDbContext>().ToSelf();
             Bind<EventLogInterceptor>().ToSelf();
+            Bind<IDatabaseCommandContext>().To<DatabaseCommandContext>();
             Bind<ITransactionalInterceptor>().To<TransactionalInterceptor>();
             Bind<EntityMatcherProvider>()
                 .ToConstant(new EntityMatcherProvider(InitializeEntitymatchers()))

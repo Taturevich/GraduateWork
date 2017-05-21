@@ -1,3 +1,4 @@
+using BusinessLogic.Infrastructure.Injection;
 using Ninject.Web.WebApi;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(TestBotConnection.App_Start.NinjectWebCommon), "Start")]

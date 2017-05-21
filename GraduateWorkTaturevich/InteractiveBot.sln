@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveBot.Core", "Inte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveBot.Web", "InteractiveBot.Web\InteractiveBot.Web.csproj", "{A17A7496-46DB-4D1C-A00F-FB8E9A78A4BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InteractiveBot.Tests", "InteractiveBot.Tests\InteractiveBot.Tests.csproj", "{5691F63F-090C-4EDD-AFEC-876ABE0CDEFF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{A17A7496-46DB-4D1C-A00F-FB8E9A78A4BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A17A7496-46DB-4D1C-A00F-FB8E9A78A4BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A17A7496-46DB-4D1C-A00F-FB8E9A78A4BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5691F63F-090C-4EDD-AFEC-876ABE0CDEFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5691F63F-090C-4EDD-AFEC-876ABE0CDEFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5691F63F-090C-4EDD-AFEC-876ABE0CDEFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5691F63F-090C-4EDD-AFEC-876ABE0CDEFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

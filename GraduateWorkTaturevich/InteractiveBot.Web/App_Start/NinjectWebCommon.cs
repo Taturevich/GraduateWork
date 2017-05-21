@@ -1,3 +1,5 @@
+using BusinessLogic.Infrastructure.Injection;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(AimlBotWeb.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(AimlBotWeb.App_Start.NinjectWebCommon), "Stop")]
 

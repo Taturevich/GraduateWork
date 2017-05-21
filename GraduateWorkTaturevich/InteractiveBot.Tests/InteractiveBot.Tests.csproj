@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5691F63F-090C-4EDD-AFEC-876ABE0CDEFF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>InteractiveBot.Tests</RootNamespace>
+    <AssemblyName>InteractiveBot.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InteractiveBot.BotConnector\InteractiveBot.BotConnector.csproj">
+      <Project>{28968557-261a-4ec5-8d55-59bbee253397}</Project>
+      <Name>InteractiveBot.BotConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InteractiveBot.BusinessLogic\InteractiveBot.BusinessLogic.csproj">
+      <Project>{0971ac43-48e2-41e0-84c4-677fcdfc455d}</Project>
+      <Name>InteractiveBot.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InteractiveBot.Core\InteractiveBot.Core.csproj">
+      <Project>{9c87d82c-0e27-4995-a2cb-72bcb84ef2e2}</Project>
+      <Name>InteractiveBot.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InteractiveBot.Web\InteractiveBot.Web.csproj">
+      <Project>{a17a7496-46db-4d1c-a00f-fb8e9a78a4bc}</Project>
+      <Name>InteractiveBot.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InteractiveBot.Yandex.Speller.Api\InteractiveBot.Yandex.Speller.Api.csproj">
+      <Project>{459f6a84-441d-4327-8a7b-1a1989aa02d5}</Project>
+      <Name>InteractiveBot.Yandex.Speller.Api</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

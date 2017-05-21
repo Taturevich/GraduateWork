@@ -117,16 +117,17 @@
     <Compile Include="Enums\RegisterResult.cs" />
     <Compile Include="Enums\Role.cs" />
     <Compile Include="Enums\SenderType.cs" />
-    <Compile Include="Infrastructure\BlDbContext.cs" />
-    <Compile Include="Infrastructure\BusinessLogicModule.cs" />
-    <Compile Include="Infrastructure\EventLogInterceptor.cs" />
+    <Compile Include="Infrastructure\DAL\BlDbContext.cs" />
+    <Compile Include="Infrastructure\Injection\BusinessLogicModule.cs" />
+    <Compile Include="Infrastructure\DAL\DatabaseCommandContext.cs" />
+    <Compile Include="Infrastructure\Injection\EventLogInterceptor.cs" />
     <Compile Include="Infrastructure\Extensions\CollectionExtensions.cs" />
     <Compile Include="Infrastructure\Extensions\StringExtensions.cs" />
-    <Compile Include="Infrastructure\InjectAttribute.cs" />
-    <Compile Include="Infrastructure\PasswordHasher.cs" />
-    <Compile Include="Infrastructure\Repository.cs" />
-    <Compile Include="Infrastructure\ServiceBase.cs" />
-    <Compile Include="Infrastructure\TransactionalAttribute.cs" />
+    <Compile Include="Infrastructure\Injection\InjectAttribute.cs" />
+    <Compile Include="Infrastructure\Extensions\PasswordHasher.cs" />
+    <Compile Include="Infrastructure\DAL\Repository.cs" />
+    <Compile Include="Infrastructure\DAL\ServiceBase.cs" />
+    <Compile Include="Infrastructure\DAL\TransactionalAttribute.cs" />
     <Compile Include="Migrations\201705201657423_ProductChange.cs" />
     <Compile Include="Migrations\201705201657423_ProductChange.Designer.cs">
       <DependentUpon>201705201657423_ProductChange.cs</DependentUpon>

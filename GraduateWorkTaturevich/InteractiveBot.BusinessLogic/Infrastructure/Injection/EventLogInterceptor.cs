@@ -2,12 +2,12 @@
 using System.Diagnostics;
 using BusinessLogic.Services;
 using Ninject;
-using Ninject.Extensions.Interception;
-using Ninject.Extensions.Interception.Attributes;
-using Ninject.Extensions.Interception.Request;
 using EventLog = BusinessLogic.Entities.Infrastructure.EventLog;
+using Ninject.Extensions.Interception;
+using Ninject.Extensions.Interception.Request;
+using Ninject.Extensions.Interception.Attributes;
 
-namespace BusinessLogic.Infrastructure
+namespace BusinessLogic.Infrastructure.Injection
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public sealed class BotEventLogAttribute : InterceptAttribute
