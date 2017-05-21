@@ -349,9 +349,13 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLogic\AimlBot.BusinessLogic.csproj">
-      <Project>{0971AC43-48E2-41E0-84C4-677FCDFC455D}</Project>
-      <Name>AimlBot.BusinessLogic</Name>
+    <ProjectReference Include="..\InteractiveBot.BusinessLogic\InteractiveBot.BusinessLogic.csproj">
+      <Project>{0971ac43-48e2-41e0-84c4-677fcdfc455d}</Project>
+      <Name>InteractiveBot.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InteractiveBot.Core\InteractiveBot.Core.csproj">
+      <Project>{9c87d82c-0e27-4995-a2cb-72bcb84ef2e2}</Project>
+      <Name>InteractiveBot.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

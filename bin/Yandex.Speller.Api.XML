@@ -1,0 +1,273 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Yandex.Speller.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Yandex.Speller.Api.DataContract.Error">
+            <summary>
+            The data model for represent error.
+            </summary>
+        </member>
+        <member name="P:Yandex.Speller.Api.DataContract.Error.Code">
+            <summary>
+            Error code.
+            <see href="https://tech.yandex.ru/speller/doc/dg/reference/error-codes-docpage/" />.
+            </summary>
+        </member>
+        <member name="P:Yandex.Speller.Api.DataContract.Error.Col">
+            <summary>
+            Column number (starting from 0).
+            </summary>
+        </member>
+        <member name="P:Yandex.Speller.Api.DataContract.Error.Len">
+            <summary>
+            Length of the misspelled word.
+            </summary>
+        </member>
+        <member name="P:Yandex.Speller.Api.DataContract.Error.Pos">
+            <summary>
+            Position of the misspelled word (counting from 0).
+            </summary>
+        </member>
+        <member name="P:Yandex.Speller.Api.DataContract.Error.Row">
+            <summary>
+            Line number (counting from 0).
+            </summary>
+        </member>
+        <member name="P:Yandex.Speller.Api.DataContract.Error.Steer">
+            <summary>
+            Tip (may be several or may not be available).
+            </summary>
+        </member>
+        <member name="P:Yandex.Speller.Api.DataContract.Error.Word">
+            <summary>
+            The original word.
+            </summary>
+        </member>
+        <member name="T:Yandex.Speller.Api.DataContract.ErrorCode">
+            <summary>
+            Error codes.
+            <see href="https://tech.yandex.ru/speller/doc/dg/reference/error-codes-docpage/" />.
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.ErrorCode.ErrorUnknownWord">
+            <summary>
+            There is no word in the dictionary.
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.ErrorCode.ErrorRepeatWord">
+            <summary>
+            Repeating words.
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.ErrorCode.ErrorCapitalization">
+            <summary>
+            Incorrect use of uppercase and lowercase letters.
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.ErrorCode.ErrorTooManyErrors">
+            <summary>
+            The text contains too many errors. In this case, the application can send text Yandex.Speller remain untested in
+            the following query.
+            </summary>
+        </member>
+        <member name="T:Yandex.Speller.Api.DataContract.Lang">
+            <summary>
+            Supported languages.
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.Lang.Ru">
+            <summary>
+            Russian
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.Lang.Uk">
+            <summary>
+            Ukrainian
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.Lang.En">
+            <summary>
+            English
+            </summary>
+        </member>
+        <member name="T:Yandex.Speller.Api.DataContract.Options">
+            <summary>
+            Settings Yandex.Speller
+            <see href="https://tech.yandex.ru/speller/doc/dg/reference/speller-options-docpage/" />.
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.Options.Default">
+            <summary>
+            No specific options.
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.Options.IgnoreUppercase">
+            <summary>
+            Ignore words written in capital letters, such as "VPK".
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.Options.IgnoreDigits">
+            <summary>
+            Ignore words with numbers, such as "avp17h4534."
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.Options.IgnoreUrls">
+            <summary>
+            Ignore Internet addresses, email addresses and filenames.
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.Options.FindRepeatWords">
+            <summary>
+            Highlight repetitions of words, consecutive. For example, "I flew to Cyprus."
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.Options.IgnoreLatin">
+            <summary>
+            Ignore words, written in Latin, for example, "madrid".
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.Options.NoSuggest">
+            <summary>
+            Just check the text, without giving options for replacement.
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.Options.FlagLatin">
+            <summary>
+            Flag words, written in Latin, as errors.
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.Options.ByWords">
+            <summary>
+            Do not use a dictionary environment (context) during the scan. This is useful in cases where the service is
+            transmitted to the input of a list of individual words.
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.Options.IgnoreCapitalization">
+            <summary>
+            Ignore the incorrect use of uppercase / lowercase letters, for example, in the word "moscow".
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.Options.IgnoreRomanNumerals">
+            <summary>
+            Ignore Roman numerals ("I, II, III, ...").
+            </summary>
+        </member>
+        <member name="T:Yandex.Speller.Api.DataContract.SpellResult">
+            <summary>
+            <see href="https://tech.yandex.ru/speller/doc/dg/reference/checkText-docpage/" />.
+            </summary>
+        </member>
+        <member name="P:Yandex.Speller.Api.DataContract.SpellResult.Errors">
+            <summary>
+            Found errors.
+            </summary>
+        </member>
+        <member name="T:Yandex.Speller.Api.DataContract.TextFormat">
+            <summary>
+            Checked text format.
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.TextFormat.Plain">
+            <summary>
+            Text without markup.
+            </summary>
+        </member>
+        <member name="F:Yandex.Speller.Api.DataContract.TextFormat.Html">
+            <summary>
+            HTML-Text.
+            </summary>
+        </member>
+        <member name="T:Yandex.Speller.Api.IYandexSpeller">
+            <summary>
+            Spell checking interface through Yandex (User friendly).
+            </summary>
+        </member>
+        <member name="M:Yandex.Speller.Api.IYandexSpeller.CheckText(System.String,Yandex.Speller.Api.DataContract.Lang,Yandex.Speller.Api.DataContract.Options,Yandex.Speller.Api.DataContract.TextFormat)">
+            <summary>
+            Checks spelling in this passage of text.
+            </summary>
+        </member>
+        <member name="M:Yandex.Speller.Api.IYandexSpeller.CheckTexts(System.String[],Yandex.Speller.Api.DataContract.Lang,Yandex.Speller.Api.DataContract.Options,Yandex.Speller.Api.DataContract.TextFormat)">
+            <summary>
+            Checks spelling in specified text fragments.
+            </summary>
+            <returns>For each fragment returns a separate array error prompts.</returns>
+        </member>
+        <member name="T:Yandex.Speller.Api.Native.IYandexNativeSpeller">
+            <summary>
+            Spell checking interface through Yandex (native API).
+            </summary>
+        </member>
+        <member name="M:Yandex.Speller.Api.Native.IYandexNativeSpeller.CheckText(System.String,System.String,System.Int32,System.String)">
+            <summary>
+            Checks spelling in this passage of text.
+            <see href="https://tech.yandex.ru/speller/doc/dg/reference/checkText-docpage/" />
+            </summary>
+        </member>
+        <member name="M:Yandex.Speller.Api.Native.IYandexNativeSpeller.CheckTexts(System.String[],System.String,System.Int32,System.String)">
+            <summary>
+            Checks spelling in specified text fragments. For each fragment returns a separate array error prompts.
+            <see href="https://tech.yandex.ru/speller/doc/dg/reference/checkTexts-docpage/" />.
+            </summary>
+        </member>
+        <member name="T:Yandex.Speller.Api.Native.YandexNativeSpeller">
+            <summary>
+            Implementing an interface <see cref="T:Yandex.Speller.Api.Native.IYandexNativeSpeller" />.
+            </summary>
+        </member>
+        <member name="M:Yandex.Speller.Api.Native.YandexNativeSpeller.#ctor(RestSharp.IRestClient)">
+            <summary />
+        </member>
+        <member name="M:Yandex.Speller.Api.Native.YandexNativeSpeller.CheckText(System.String,System.String,System.Int32,System.String)">
+            <summary>
+            Checks spelling in this passage of text.
+            <see href="https://tech.yandex.ru/speller/doc/dg/reference/checkText-docpage/" />
+            </summary>
+        </member>
+        <member name="M:Yandex.Speller.Api.Native.YandexNativeSpeller.CheckTexts(System.String[],System.String,System.Int32,System.String)">
+            <summary>
+            Checks spelling in specified text fragments. For each fragment returns a separate array error prompts.
+            <see href="https://tech.yandex.ru/speller/doc/dg/reference/checkTexts-docpage/" />.
+            </summary>
+        </member>
+        <member name="M:Yandex.Speller.Api.Native.YandexNativeSpeller.CreateYandexNativeSpeller">
+            <summary>
+            Creating Yandex.Speller client.
+            </summary>
+        </member>
+        <member name="M:Yandex.Speller.Api.Native.YandexNativeSpeller.CreateYandexNativeSpeller(System.String)">
+            <summary>
+            Creating Yandex.Speller client.
+            </summary>
+        </member>
+        <member name="T:Yandex.Speller.Api.YandexSpeller">
+            <summary>
+            Implementing an interface <see cref="T:Yandex.Speller.Api.IYandexSpeller" />.
+            </summary>
+        </member>
+        <member name="M:Yandex.Speller.Api.YandexSpeller.#ctor(Yandex.Speller.Api.Native.IYandexNativeSpeller)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="nativeSpeller">Custom implementation.</param>
+        </member>
+        <member name="M:Yandex.Speller.Api.YandexSpeller.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:Yandex.Speller.Api.YandexSpeller.CheckText(System.String,Yandex.Speller.Api.DataContract.Lang,Yandex.Speller.Api.DataContract.Options,Yandex.Speller.Api.DataContract.TextFormat)">
+            <summary>
+            Checks spelling in this passage of text.
+            </summary>
+        </member>
+        <member name="M:Yandex.Speller.Api.YandexSpeller.CheckTexts(System.String[],Yandex.Speller.Api.DataContract.Lang,Yandex.Speller.Api.DataContract.Options,Yandex.Speller.Api.DataContract.TextFormat)">
+            <summary>
+            Checks spelling in specified text fragments.
+            </summary>
+            <returns>For each fragment returns a separate array error prompts.</returns>
+        </member>
+    </members>
+</doc>

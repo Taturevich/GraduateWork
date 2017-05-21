@@ -206,13 +206,17 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLogic\AimlBot.BusinessLogic.csproj">
+    <ProjectReference Include="..\InteractiveBot.BusinessLogic\InteractiveBot.BusinessLogic.csproj">
       <Project>{0971ac43-48e2-41e0-84c4-677fcdfc455d}</Project>
-      <Name>AimlBot.BusinessLogic</Name>
+      <Name>InteractiveBot.BusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Yandex.Speller.Api\AimlBot.Yandex.Speller.Api.csproj">
+    <ProjectReference Include="..\InteractiveBot.Core\InteractiveBot.Core.csproj">
+      <Project>{9c87d82c-0e27-4995-a2cb-72bcb84ef2e2}</Project>
+      <Name>InteractiveBot.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InteractiveBot.Yandex.Speller.Api\InteractiveBot.Yandex.Speller.Api.csproj">
       <Project>{459f6a84-441d-4327-8a7b-1a1989aa02d5}</Project>
-      <Name>AimlBot.Yandex.Speller.Api</Name>
+      <Name>InteractiveBot.Yandex.Speller.Api</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

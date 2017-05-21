@@ -1,6 +1,5 @@
 ﻿using AIMLbot;
-using System;
-using System.IO;
+using AIMLbot.AIMLTagHandlers;
 
 namespace BusinessLogic.BotConfiguration
 {
@@ -28,7 +27,7 @@ namespace BusinessLogic.BotConfiguration
         // Given an input string, finds a response using AIMLbot lib
         public string GetOutput(string input)
         {
-            Request request = new Request(input, _myUser, _aimlBot);
+            var request = new Request(input, _myUser, _aimlBot);
             Result res = _aimlBot.Chat(request);
             return res.Output;
         }
