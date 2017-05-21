@@ -128,11 +128,13 @@
     <Compile Include="Infrastructure\DAL\Repository.cs" />
     <Compile Include="Infrastructure\DAL\ServiceBase.cs" />
     <Compile Include="Infrastructure\DAL\TransactionalAttribute.cs" />
-    <Compile Include="Migrations\201705201657423_ProductChange.cs" />
-    <Compile Include="Migrations\201705201657423_ProductChange.Designer.cs">
-      <DependentUpon>201705201657423_ProductChange.cs</DependentUpon>
+    <Compile Include="Migrations\201705211341099_ImageFields.cs" />
+    <Compile Include="Migrations\201705211341099_ImageFields.Designer.cs">
+      <DependentUpon>201705211341099_ImageFields.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\DisplayedObject.cs" />
+    <Compile Include="Models\ReplyContainer.cs" />
     <Compile Include="Models\UserChatMessageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BotService.cs" />
@@ -143,8 +145,8 @@
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705201657423_ProductChange.resx">
-      <DependentUpon>201705201657423_ProductChange.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705211341099_ImageFields.resx">
+      <DependentUpon>201705211341099_ImageFields.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <EmbeddedResource Include="lib\aiml\AI.aiml" />

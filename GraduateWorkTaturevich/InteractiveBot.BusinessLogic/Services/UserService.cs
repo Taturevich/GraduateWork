@@ -11,6 +11,7 @@ namespace BusinessLogic.Services
     public interface IUserService : IEntityServiceBase<User>
     {
         RegisterResult RegisterUser(string login, string password);
+
         bool CheckUser(string login, string password);
     }
 

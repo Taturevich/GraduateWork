@@ -10,6 +10,8 @@ using Microsoft.Bot.Connector;
 using BusinessLogic.Services;
 using Yandex.Speller.Api;
 using Yandex.Speller.Api.DataContract;
+using System.Collections.Generic;
+using BusinessLogic.Models;
 
 namespace TestBotConnection.Controllers
 {
@@ -42,7 +44,7 @@ namespace TestBotConnection.Controllers
 
                 var words = correctMessage.ToWords();
 
-                var parseTest = _messageService.TryParseToDatabaseQuery(words);
+                var container = _messageService.TryParseToDatabaseQuery(words);
 
                 var newMessage = new Message
                 {
@@ -53,11 +55,21 @@ namespace TestBotConnection.Controllers
                 };
 
                 _messageService.Add(newMessage);
-                var botAnswer = _botService.GetAnswer(activity.Text);
+                string answerText;
+                if (container.IsContainsDomainData)
+                {
+                    var root = Request.RequestUri.GetLeftPart(UriPartial.Authority);
+                    container.DomainDataList.ForEach(async x => await ReplyToUser(x, activity, connector));
+                }
+                else
+                {
+                    var botAnswer = _botService.GetAnswer(activity.Text);
+                    answerText = botAnswer.Text ?? string.Empty;
+                    var reply = activity.CreateReply($"{answerText}");
+                    await connector.Conversations.ReplyToActivityAsync(reply);
+                }
 
                 // return our reply to the user
-                Activity reply = activity.CreateReply($"{botAnswer.Text}");
-                await connector.Conversations.ReplyToActivityAsync(reply);
             }
             else
             {
@@ -65,6 +77,23 @@ namespace TestBotConnection.Controllers
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
+        }
+
+        private async Task ReplyToUser(
+            DisplayedObject displayedObject,
+            Activity activity,
+            ConnectorClient connector)
+        {
+            var reply = activity.CreateReply(displayedObject.DisplayInformation);
+            reply.Attachments = new List<Attachment>();
+            reply.Attachments.Add(new Attachment()
+            {
+                ContentUrl = Url.Content($"~/content/{displayedObject.ImageName}"),
+                ContentType = "image/png",
+                Name = $"{displayedObject.ImageName}"
+            });
+            await connector.Conversations.ReplyToActivityAsync(reply);
+            await Task.Delay(1500);
         }
 
         private Activity HandleSystemMessage(Activity message)

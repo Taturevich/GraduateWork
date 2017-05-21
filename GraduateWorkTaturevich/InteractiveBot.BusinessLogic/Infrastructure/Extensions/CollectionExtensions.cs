@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using FastMember;
 
 namespace BusinessLogic.Infrastructure.Extensions
@@ -15,6 +17,13 @@ namespace BusinessLogic.Infrastructure.Extensions
             }
 
             return table;
+        }
+
+        public static object ToTypedList(this IEnumerable<object> value, Type type)
+        {
+            var convertedValue = value.Select(item => Convert.ChangeType(item, type)).Where(x => true).ToList();
+            Console.WriteLine(convertedValue);
+            return convertedValue;
         }
     }
 }

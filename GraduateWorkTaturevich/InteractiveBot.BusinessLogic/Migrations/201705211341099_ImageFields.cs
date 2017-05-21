@@ -3,7 +3,7 @@ namespace BusinessLogic.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class ProductChange : DbMigration
+    public partial class ImageFields : DbMigration
     {
         public override void Up()
         {
@@ -23,6 +23,7 @@ namespace BusinessLogic.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
+                        ImageName = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -115,7 +116,9 @@ namespace BusinessLogic.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
                         Mark = c.String(),
+                        ImageName = c.String(),
                         Sortament = c.String(),
                         Specification = c.String(),
                         Category_Id = c.Int(),
