@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+<category><pattern>В КАКИХ ЦИСТЕРНАХ НЕФТЬ</pattern><template>Во всех, которые имеют <bot name="favoritecolor"/> цвет.  А твой?</template></category>
+
+</aiml>

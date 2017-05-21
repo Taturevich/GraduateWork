@@ -1,0 +1,30 @@
+﻿<Window x:Class="AimlBotUI.Views.AuthorizeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AimlBotUI.Views"
+        xmlns:behaviours="clr-namespace:AimlBotUI.Infrastructure.Behaviours"
+        mc:Ignorable="d"
+        Title="AuthorizeView" Height="155" Width="250">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Имя пользователя"/>
+        <TextBox x:Name="Login" Grid.Row="0" Grid.Column="1"/>
+        <Label Content="Пароль" Grid.Row="1" Grid.Column="0" />
+        <PasswordBox behaviours:PasswordHelper.Attach="True" 
+                     behaviours:PasswordHelper.Password="{Binding Path=Password, Mode=TwoWay}" 
+                     Margin="5"
+                     Height="30"
+                     Grid.Row="1" Grid.Column="1"/>
+        <Button Content="Войти" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" HorizontalAlignment="Center"/>
+    </Grid>
+</Window>

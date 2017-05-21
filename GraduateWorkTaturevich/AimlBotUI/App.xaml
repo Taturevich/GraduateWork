@@ -1,0 +1,32 @@
+﻿<Application x:Class="AimlBotUI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:shared="clr-namespace:AimlBotUI.Shared"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:AimlBotUI">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <local:AppBootstrapper x:Key="Bootstrapper" />
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="MinWidth" Value="70"/>
+                <Setter Property="MinHeight" Value="30"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="MinHeight" Value="30"/>
+            </Style>
+            
+            <Style TargetType="shared:AutoScrollingListView">
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+            
+            
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

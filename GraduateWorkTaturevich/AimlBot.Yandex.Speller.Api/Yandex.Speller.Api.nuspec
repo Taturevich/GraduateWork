@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/gmalyshev/Yandex.Speller.Api</projectUrl>
+    <iconUrl>http://tech.yandex.ru/favicon.ico</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Release preview.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>Yandex Speller Spellcheck</tags>
+  </metadata>
+</package>

@@ -1,0 +1,34 @@
+﻿<Window x:Class="AimlBotUI.Infrastructure.Dialogs.DialogView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:AimlBotUI.Shared"
+        xmlns:local="clr-namespace:AimlBotUI.Infrastructure.Dialogs"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Title="{Binding DialogType}" Height="160" Width="300">
+    <Window.Resources>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Image Width="45" Height="45" Margin="5" Source="{Binding ImageSource}"/>
+            <Label Width="200" Height="60">
+                <TextBlock Margin="5" Text="{Binding Message}" TextWrapping="Wrap" 
+                           FontSize="16" HorizontalAlignment="Center" />
+            </Label>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+            <Button Style="{StaticResource DefaultButton}" Content="OK"  x:Name="OkResult"/>
+            <Button Style="{StaticResource DefaultButton}"
+                    Visibility="{Binding IsConfirmationDialog, Converter={StaticResource BoolToHiddenConverter}, 
+                                    UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"
+                    Content="Cancel" x:Name="CancelResult"/>
+        </StackPanel>
+    </Grid>
+</Window>

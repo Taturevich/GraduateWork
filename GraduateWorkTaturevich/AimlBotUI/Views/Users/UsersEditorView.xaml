@@ -1,0 +1,49 @@
+﻿<Window x:Class="AimlBotUI.Views.Users.UsersEditorView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AimlBotUI.Views.Users"
+        mc:Ignorable="d"
+        Height="400" Width="450"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.3*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ListView Grid.Row="0" x:Name="Items">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Width="100">
+                        <GridViewColumn.Header >
+                            <GridViewColumnHeader Content="Имя"/>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Role}" Width="150">
+                        <GridViewColumn.Header >
+                            <GridViewColumnHeader Content="Роль"/>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Label Content="Имя"/>
+            <TextBox Text="{Binding CurrentOperativeUser.Name, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="20"/>
+            <Label Content="Роль"/>
+            <ComboBox ItemsSource="{Binding Roles}"
+                      SelectedItem="{Binding SelectedUserRole, UpdateSourceTrigger=PropertyChanged}"
+                      Width="100" Margin="5"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="SaveCommand" Content="Сохранить"/>
+            <Button x:Name="DeleteCommand" Content="Удалить"/>
+            <Button x:Name="UpdateCommand" Content="Обновить"/>
+        </StackPanel>
+    </Grid>
+</Window>

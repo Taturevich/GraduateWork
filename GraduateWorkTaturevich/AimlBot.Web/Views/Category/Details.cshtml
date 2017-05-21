@@ -1,0 +1,26 @@
+﻿@model AimlBotWeb.Features.Categories.CategoryModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h3>Детали</h3>
+
+<div>
+    <h4>Категория</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Изменить", "Update", new { id = Model.Id }) |
+    @Html.ActionLink("Назад к списку", "All")
+</p>
