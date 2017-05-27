@@ -1,4 +1,5 @@
-﻿using AIMLbot;
+﻿using System.IO;
+using AIMLbot;
 
 namespace BusinessLogic.BotConfiguration
 {
@@ -30,5 +31,7 @@ namespace BusinessLogic.BotConfiguration
             Result res = _aimlBot.Chat(request);
             return res.Output;
         }
+
+        public string GetUserDirectoryAimlFile => Path.Combine(_aimlBot.PathToAIML, "UserDirectory.aiml");
     }
 }

@@ -10,14 +10,17 @@
 @if (User != null && User.Identity.IsAuthenticated)
 {
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <p><a class="btn btn-default" href="@Url.Action("All", "Category")">Категории</a></p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <p><a class="btn btn-default" href="@Url.Action("All", "Product")">Продукция</a></p>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <p><a class="btn btn-default" href="@Url.Action("All", "Message")">Сообщения</a></p>
+        </div>
+        <div class="col-md-3">
+            <p><a class="btn btn-default" href="@Url.Action("Main", "Learning")">Обучение</a></p>
         </div>
     </div>
 }

@@ -238,6 +238,9 @@
     <Compile Include="EventLogs\EventLogModel.cs" />
     <Compile Include="Features\Categories\CategoryController.cs" />
     <Compile Include="Features\Categories\CategoryModel.cs" />
+    <Compile Include="Features\Learning\BotPatternsModel.cs" />
+    <Compile Include="Features\Learning\LearningController.cs" />
+    <Compile Include="Features\Learning\LearnMessageModel.cs" />
     <Compile Include="Features\Products\ProductModel.cs" />
     <Compile Include="Features\Products\ProductController.cs" />
     <Compile Include="Global.asax.cs">
@@ -265,6 +268,13 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="config\DefaultPredicates.xml" />
+    <Content Include="config\GenderSubstitutions.xml" />
+    <Content Include="config\Person2Substitutions.xml" />
+    <Content Include="config\PersonSubstitutions.xml" />
+    <Content Include="config\Settings.xml" />
+    <Content Include="config\Splitters.xml" />
+    <Content Include="config\Substitutions.xml" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -285,6 +295,38 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="aiml\AI.aiml" />
+    <Content Include="aiml\Atomic.aiml" />
+    <Content Include="aiml\Biography.aiml" />
+    <Content Include="aiml\Bot.aiml" />
+    <Content Include="aiml\Botmaster.aiml" />
+    <Content Include="aiml\Client.aiml" />
+    <Content Include="aiml\Computers.aiml" />
+    <Content Include="aiml\Default.aiml" />
+    <Content Include="aiml\Emotion.aiml" />
+    <Content Include="aiml\Food.aiml" />
+    <Content Include="aiml\Geography.aiml" />
+    <Content Include="aiml\History.aiml" />
+    <Content Include="aiml\Inquiry.aiml" />
+    <Content Include="aiml\Interjection.aiml" />
+    <Content Include="aiml\IU.aiml" />
+    <Content Include="aiml\Knowledge.aiml" />
+    <Content Include="aiml\Literature.aiml" />
+    <Content Include="aiml\Money.aiml" />
+    <Content Include="aiml\Movies.aiml" />
+    <Content Include="aiml\Music.aiml" />
+    <Content Include="aiml\Philosophy.aiml" />
+    <Content Include="aiml\Pickup.aiml" />
+    <Content Include="aiml\Predicates.aiml" />
+    <Content Include="aiml\Reduce.aiml" />
+    <Content Include="aiml\Reductions.aiml" />
+    <Content Include="aiml\Salutations.aiml" />
+    <Content Include="aiml\Science.aiml" />
+    <Content Include="aiml\Stack.aiml" />
+    <Content Include="aiml\Stories.aiml" />
+    <Content Include="aiml\Test.aiml" />
+    <Content Include="aiml\That.aiml" />
+    <Content Include="aiml\UserDirectory.aiml" />
     <None Include="Properties\PublishProfiles\AimlBotWeb20170517101544 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -351,6 +393,8 @@
     <Content Include="Views\Category\Add.cshtml" />
     <Content Include="Views\Category\Details.cshtml" />
     <Content Include="Views\Category\Update.cshtml" />
+    <Content Include="Views\Learning\Main.cshtml" />
+    <Content Include="Views\Learning\UserDirectory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
