@@ -13,7 +13,7 @@
   <item name="notacceptinguserinputmessage" value="This bot is currently set to not accept user input."/>
   <item name="stripperregex" value="[^0-9a-zA-Zа-яА-Я]"/>
   <item name="version" value="0.1"/>
-  <item name="name" value="Топливная база"/>
+  <item name="name" value="Интерактивный помощник9000"/>
   <item name="botmaster" value="Unknown"/>
   <item name="master" value="Unknown"/>
   <item name="author" value="Nicholas H.Tollervey"/>

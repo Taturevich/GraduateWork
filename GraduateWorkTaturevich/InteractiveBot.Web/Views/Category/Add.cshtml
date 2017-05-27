@@ -4,15 +4,12 @@
     ViewBag.Title = "Добавление категории";
 }
 
-<h3>Добавление категории</h3>
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Категория</h4>
+        <h4>@Viewbag.Title</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -32,7 +29,7 @@
 }
 
 <div>
-    @Html.ActionLink("Назад к списку", "All")
+    <span><a class="btn btn-default" href="@Url.Action("All")">Назад к списку</a></span>
 </div>
 
 @section Scripts {

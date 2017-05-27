@@ -1,13 +1,12 @@
 ﻿@model IEnumerable<AimlBotWeb.Features.Products.ProductModel>
 
 @{
-    ViewBag.Title = "All";
+    ViewBag.Title = "Продукция";
 }
 
-<h2>All</h2>
-
+<h3>@ViewBag.Title</h3>
 <p>
-    @Html.ActionLink("Create New", "Add")
+    @Html.ActionLink("Добавить", "Add")
 </p>
 <table class="table">
     <tr>
@@ -35,11 +34,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Specification)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Update", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
+            @if (User.IsInRole("Admin"))
+            {
+                <td>
+                    @Html.ActionLink("Изменить", "Update", new { id = item.Id }) |
+                    @Html.ActionLink("Детали", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                </td>
+            }
         </tr>
     }
 

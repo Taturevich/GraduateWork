@@ -4,9 +4,6 @@
     ViewBag.Title = "Add";
 }
 
-<h2>Add</h2>
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -47,9 +44,9 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "All")
-</div>
+<p>
+    <span><a class="btn btn-default" href="@Url.Action("All")">Назад к списку</a></span>
+</p>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

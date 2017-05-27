@@ -5,7 +5,6 @@
 }
 
 <h3>Категории</h3>
-
 <p>
     @Html.ActionLink("Создать новую", "Add")
 </p>
@@ -23,12 +22,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
-                @Html.ActionLink("Изменить", "Update", new { id = item.Id }) |
-                @Html.ActionLink("Детали", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
-            </td>
+            @if (User.IsInRole("Admin"))
+            {
+                <td>
+                    @Html.ActionLink("Изменить", "Update", new { id = item.Id }) |
+                    @Html.ActionLink("Детали", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+                </td>
+            }
         </tr>
     }
-
 </table>

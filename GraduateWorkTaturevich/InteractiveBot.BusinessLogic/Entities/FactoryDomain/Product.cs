@@ -19,6 +19,6 @@ namespace BusinessLogic.Entities.FactoryDomain
 
         public virtual Category Category { get; set; }
 
-        public override string ToString() => $" \n\n{Name}\n\nМарка: {Mark} Сортамент: {Sortament}\n\n НТД: {Specification}\n\n";
+        public override string ToString() => $" \n\n*{Name}*\n\n*Марка*: {Mark} *Сортамент*: {Sortament}\n\n *НТД*: {Specification}\n\n";
     }
 }

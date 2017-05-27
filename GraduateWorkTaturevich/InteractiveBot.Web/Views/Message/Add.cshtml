@@ -3,16 +3,12 @@
 @{
     ViewBag.Title = "Добавление";
 }
-
-<h2>Добавление</h2>
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Сообщение</h4>
+        <h4>Добавить сообщение</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -55,9 +51,9 @@
     </div>
 }
 
-<div>
-    @Html.ActionLink("Назад к списку", "Messages")
-</div>
+<p>
+    <span><a class="btn btn-default" href="@Url.Action("All")">Назад к списку</a></span>
+</p>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

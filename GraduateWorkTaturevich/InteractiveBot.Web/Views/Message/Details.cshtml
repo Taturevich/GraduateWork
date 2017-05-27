@@ -3,9 +3,6 @@
 @{
     ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
-
 <div>
     <h4>MessageModel</h4>
     <hr />
@@ -41,10 +38,9 @@
         <dd>
             @Html.DisplayFor(model => model.UserName)
         </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Update", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "All")
+    <span style="display:inline-block"><a class="btn btn-default" href="@Url.Action("Update")">Изменить</a></span>
+    <span style="display:inline-block"><a class="btn btn-default" href="@Url.Action("All")">Назад к списку</a></span>
 </p>

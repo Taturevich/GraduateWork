@@ -27,11 +27,6 @@ namespace AimlBotWeb.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
-            ////return new BlDbContext("Server=tcp:taturevichserver.database.windows.net,1433;" +
-            ////                       "Initial Catalog=NewDb;Persist Security Info=False;" +
-            ////                       "User ID=ivan_taturevich;Password=Aa83386491994;" +
-            ////                       "MultipleActiveResultSets=False;Encrypt=True;" +
-            ////                       "TrustServerCertificate=False;Connection Timeout=30;");
         }
     }
 }

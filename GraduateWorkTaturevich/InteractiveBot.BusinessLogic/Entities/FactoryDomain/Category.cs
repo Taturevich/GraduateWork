@@ -15,6 +15,6 @@ namespace BusinessLogic.Entities.FactoryDomain
 
         public virtual ICollection<Product> Products { get; set; }
 
-        public override string ToString() => $"Категория {Name}\n\n";
+        public override string ToString() => $"Категория *{Name}*\n\n";
     }
 }
