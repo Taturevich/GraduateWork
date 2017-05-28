@@ -9,6 +9,11 @@ namespace BusinessLogic.BotConfiguration
         private readonly Bot _aimlBot;
         private readonly User _myUser;
 
+        private const string RemoteApiBotEndpoint =
+            "http://taturevichtestbot.azurewebsites.net/api/file";
+        private const string RemoteApiBotFilePath =
+            "http://taturevichtestbot.azurewebsites.net/aiml/UserDirectory.xml";
+
         public BotInitialization()
         {
             _aimlBot = new Bot();
@@ -32,6 +37,10 @@ namespace BusinessLogic.BotConfiguration
             return res.Output;
         }
 
-        public string GetUserDirectoryAimlFile => Path.Combine(_aimlBot.PathToAIML, "UserDirectory.aiml");
+        public string GetUserDirectoryAimlFile => Path.Combine(_aimlBot.PathToAIML, "UserDirectory.xml");
+
+        public string GetUserDirectoryRemoteAimlApi => RemoteApiBotEndpoint;
+
+        public string GetUserDirectoryRemoteAimlFile => RemoteApiBotFilePath;
     }
 }

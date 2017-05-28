@@ -326,7 +326,7 @@
     <Content Include="aiml\Stories.aiml" />
     <Content Include="aiml\Test.aiml" />
     <Content Include="aiml\That.aiml" />
-    <Content Include="aiml\UserDirectory.aiml" />
+    <Content Include="aiml\UserDirectory.xml" />
     <None Include="Properties\PublishProfiles\AimlBotWeb20170517101544 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />

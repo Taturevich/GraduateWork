@@ -168,6 +168,7 @@
     <Compile Include="App_Start\NinjectDependencyScope.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -207,7 +208,7 @@
     <Content Include="aiml\Stories.aiml" />
     <Content Include="aiml\Test.aiml" />
     <Content Include="aiml\That.aiml" />
-    <Content Include="aiml\Toplivo.aiml" />
+    <Content Include="aiml\UserDirectory.xml" />
     <None Include="Properties\PublishProfiles\TaturevichTestBot - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

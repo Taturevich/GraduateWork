@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using BusinessLogic.BotConfiguration;
 using BusinessLogic.Entities.Infrastructure;
@@ -12,7 +14,7 @@ namespace BusinessLogic.Services
     {
         Message GetAnswer(string input);
 
-        void CreateAnswer(string template, string pattern);
+        Task CreateAnswer(string template, string pattern);
 
         Dictionary<string, string> GetPatternsFromDirectory();
     }
@@ -45,22 +47,32 @@ namespace BusinessLogic.Services
             return answer;
         }
 
-        public void CreateAnswer(string template, string pattern)
+        public async Task CreateAnswer(string template, string pattern)
         {
-            var filePath = _botInit.GetUserDirectoryAimlFile;
+            await Task.Run(() =>
+            {
+                var fileUri = _botInit.GetUserDirectoryRemoteAimlFile;
 
-            var doc = XDocument.Load(filePath);
-            var aimlElement = doc.Element("aiml");
-            aimlElement?.Add(new XElement("category",
-                new XElement("template", template),
-                new XElement("pattern", pattern)));
-            doc.Save(filePath);
+                var doc = XDocument.Load(fileUri);
+                var aimlElement = doc.Element("aiml");
+                aimlElement?.Add(new XElement("category",
+                    new XElement("template", template),
+                    new XElement("pattern", pattern)));
+                doc.Save(_botInit.GetUserDirectoryAimlFile);
+                using (var webClient = new WebClient())
+                {
+                    webClient.UploadFileAsync(
+                        new Uri(_botInit.GetUserDirectoryRemoteAimlApi),
+                        "PUT",
+                        new Uri(_botInit.GetUserDirectoryAimlFile).LocalPath);
+                }
+            });
         }
 
         public Dictionary<string, string> GetPatternsFromDirectory()
         {
             var resultDictionary = new Dictionary<string, string>();
-            var filePath = _botInit.GetUserDirectoryAimlFile;
+            var filePath = _botInit.GetUserDirectoryRemoteAimlFile;
             var doc = XDocument.Load(filePath);
             var aimlElement = doc.Element("aiml");
             var xElements = aimlElement?.Elements("category");

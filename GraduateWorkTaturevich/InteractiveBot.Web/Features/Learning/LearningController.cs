@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using BusinessLogic.Services;
 
@@ -53,9 +54,9 @@ namespace AimlBotWeb.Features.Learning
 
         [HttpPost]
         [Authorize]
-        public ActionResult AddAnswer(LearnMessageModel messageModel)
+        public async Task<ActionResult> AddAnswer(LearnMessageModel messageModel)
         {
-            _botService.CreateAnswer(messageModel.BotAnswer, messageModel.UserTypedMessage);
+            await _botService.CreateAnswer(messageModel.BotAnswer, messageModel.UserTypedMessage);
 
             return RedirectToAction(nameof(Main), messageModel);
         }
