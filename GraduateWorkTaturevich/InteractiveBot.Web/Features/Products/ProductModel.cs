@@ -14,5 +14,8 @@ namespace AimlBotWeb.Features.Products
 
         [DisplayName("Спецификация")]
         public string Specification { get; set; }
+
+        [DisplayName("Фото")]
+        public string ImagePath { get; set; }
     }
 }

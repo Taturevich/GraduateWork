@@ -83,56 +83,56 @@ namespace BusinessLogic.Infrastructure.DAL
         [BotEventLog]
         public virtual async Task<List<TEntity>> GetAll()
         {
-            return await _repository.GetAll().ToListAsync();
+            return await _repository.GetAll().ToListAsync().ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         [BotEventLog]
         public virtual async Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> query)
         {
-            return await _repository.GetAll().Where(query).ToListAsync();
+            return await _repository.GetAll().Where(query).ToListAsync().ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         [BotEventLog]
         public virtual async Task<TEntity> GetById(int id)
         {
-            return await Task.Run(() => _repository.GetById(id));
+            return await Task.Run(() => _repository.GetById(id)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         [BotEventLog]
         public virtual async Task Update(TEntity entity)
         {
-            await Task.Run(() => _repository.Update(entity));
+            await Task.Run(() => _repository.Update(entity)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         [BotEventLog]
         public virtual async Task UpdateRange(IEnumerable<TEntity> entities)
         {
-            await Task.Run(() => _repository.UpdateRange(entities));
+            await Task.Run(() => _repository.UpdateRange(entities)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         [BotEventLog]
         public virtual async Task AddRange(IEnumerable<TEntity> entities)
         {
-            await Task.Run(() => _repository.AddRange(entities));
+            await Task.Run(() => _repository.AddRange(entities)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         [BotEventLog]
         public virtual async Task Add(TEntity entity)
         {
-            await Task.Run(() => _repository.Add(entity));
+            await Task.Run(() => _repository.Add(entity)).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         [BotEventLog]
         public virtual async Task Delete(TEntity entity)
         {
-            await Task.Run(() => _repository.Delete(entity));
+            await Task.Run(() => _repository.Delete(entity)).ConfigureAwait(false);
         }
     }
 }

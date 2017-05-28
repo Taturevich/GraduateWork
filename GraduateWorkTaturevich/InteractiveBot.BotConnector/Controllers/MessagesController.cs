@@ -38,14 +38,14 @@ namespace TestBotConnection.Controllers
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+                var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
                 // calculate something for us to return
 
-                var correctMessage = await CorrectInputMessage(activity.Text);
+                var correctMessage = await CorrectInputMessage(activity.Text).ConfigureAwait(false);
 
                 var words = correctMessage.ToWords();
 
-                var container = _messageService.TryParseToDatabaseQuery(words);
+                var container = await _messageService.TryParseToDatabaseQuery(words).ConfigureAwait(false);
 
                 var newMessage = new Message
                 {
@@ -54,22 +54,23 @@ namespace TestBotConnection.Controllers
                     Text = correctMessage,
                     SenderType = SenderType.User
                 };
+                await _messageService.Add(newMessage).ConfigureAwait(false);
 
-                await _messageService.Add(newMessage);
+
                 if (container.IsContainsDomainData)
                 {
                     var taskList = container
                         .DomainDataList
                         .Select(x => ReplyToUser(x, activity, connector))
                         .ToList();
-                    await Task.WhenAll(taskList);
+                    await Task.WhenAll(taskList).ConfigureAwait(false);
                 }
                 else
                 {
-                    var botAnswer = await _botService.GetAnswer(activity.Text);
+                    var botAnswer = await _botService.GetAnswer(activity.Text).ConfigureAwait(false);
                     var answerText = botAnswer.Text ?? string.Empty;
                     var reply = activity.CreateReply($"{answerText}");
-                    await connector.Conversations.ReplyToActivityAsync(reply);
+                    await connector.Conversations.ReplyToActivityAsync(reply).ConfigureAwait(false);
                 }
 
                 // return our reply to the user
@@ -150,6 +151,8 @@ namespace TestBotConnection.Controllers
                         }
                     }
                 }
+
+                return correctedmessage;
             });
 
             return Task.FromResult(correctedmessage);

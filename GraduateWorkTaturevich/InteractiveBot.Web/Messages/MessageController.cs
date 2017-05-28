@@ -22,7 +22,7 @@ namespace AimlBotWeb.Messages
         [OutputCache(Duration = 10, Location = OutputCacheLocation.Client)]
         public async Task<ActionResult> All()
         {
-            var messages = await _messageService.GetAll();
+            var messages = await _messageService.GetAll().ConfigureAwait(false);
 
             var messageModels = messages.Select(Mapper.Map<MessageModel>);
 
@@ -33,7 +33,7 @@ namespace AimlBotWeb.Messages
         public async Task<ActionResult> Update(string id)
         {
             var message = (await _messageService
-                .GetAll())
+                .GetAll().ConfigureAwait(false))
                 .FirstOrDefault(x => x.Id == Guid.Parse(id));
             var model = Mapper.Map<MessageModel>(message);
             return View(model);
@@ -44,7 +44,7 @@ namespace AimlBotWeb.Messages
         {
             var message = Mapper.Map<Message>(model);
 
-            await _messageService.Update(message);
+            await _messageService.Update(message).ConfigureAwait(false);
 
             return RedirectToAction(nameof(Update));
         }
@@ -53,7 +53,7 @@ namespace AimlBotWeb.Messages
         public async Task<ActionResult> Details(string id)
         {
             var message = (await _messageService
-                .GetAll())
+                .GetAll().ConfigureAwait(false))
                 .FirstOrDefault(x => x.Id == Guid.Parse(id));
             var model = Mapper.Map<MessageModel>(message);
             return View(model);
@@ -71,7 +71,7 @@ namespace AimlBotWeb.Messages
         {
             var message = Mapper.Map<Message>(model);
 
-            await _messageService.Add(message);
+            await _messageService.Add(message).ConfigureAwait(false);
 
             return RedirectToAction(nameof(All));
         }

@@ -70,11 +70,11 @@ namespace BusinessLogic.Services
             }
         }
 
-        public async Task<Dictionary<string, string>> GetPatternsFromDirectory()
+        public Task<Dictionary<string, string>> GetPatternsFromDirectory()
         {
             var resultDictionary = new Dictionary<string, string>();
 
-            await Task.Run(() =>
+            Task.Run(() =>
             {
                 var filePath = _botInit.GetUserDirectoryRemoteAimlFile;
                 var doc = XDocument.Load(filePath);
@@ -97,7 +97,7 @@ namespace BusinessLogic.Services
                 }
             });
 
-            return resultDictionary;
+            return Task.FromResult(resultDictionary);
         }
     }
 }

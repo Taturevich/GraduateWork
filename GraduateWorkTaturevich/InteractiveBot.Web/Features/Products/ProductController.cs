@@ -22,7 +22,7 @@ namespace AimlBotWeb.Features.Products
         [OutputCache(Duration = 10, Location = OutputCacheLocation.Client)]
         public async Task<ActionResult> All()
         {
-            var products = await _productSevice.GetAll();
+            var products = await _productSevice.GetAll().ConfigureAwait(false);
 
             var productModels = products.Select(Mapper.Map<ProductModel>);
 
@@ -33,7 +33,7 @@ namespace AimlBotWeb.Features.Products
         [OutputCache(Duration = 10, Location = OutputCacheLocation.Client)]
         public async Task<ActionResult> Update(int id)
         {
-            var product = await _productSevice.GetById(id) ?? new Product();
+            var product = await _productSevice.GetById(id).ConfigureAwait(false) ?? new Product();
             var model = Mapper.Map<ProductModel>(product);
             return View(model);
         }
@@ -43,7 +43,7 @@ namespace AimlBotWeb.Features.Products
         {
             var product = Mapper.Map<Product>(model);
 
-            await _productSevice.Update(product);
+            await _productSevice.Update(product).ConfigureAwait(false);
 
             return RedirectToAction(nameof(Update));
         }
@@ -52,7 +52,7 @@ namespace AimlBotWeb.Features.Products
         [OutputCache(Duration = 10, Location = OutputCacheLocation.Client)]
         public async Task<ActionResult> Details(int id)
         {
-            var message = await _productSevice.GetById(id) ?? new Product();
+            var message = await _productSevice.GetById(id).ConfigureAwait(false) ?? new Product();
             var model = Mapper.Map<ProductModel>(message);
             return View(model);
         }
@@ -70,7 +70,7 @@ namespace AimlBotWeb.Features.Products
         {
             var product = Mapper.Map<Product>(model);
 
-            await _productSevice.Add(product);
+            await _productSevice.Add(product).ConfigureAwait(false);
 
             return RedirectToAction(nameof(All));
         }
@@ -79,7 +79,7 @@ namespace AimlBotWeb.Features.Products
         [OutputCache(Duration = 10, Location = OutputCacheLocation.Client)]
         public async Task<ActionResult> Delete(int id)
         {
-            var product = await _productSevice.GetById(id);
+            var product = await _productSevice.GetById(id).ConfigureAwait(false);
             if (product != null)
             {
                 await _productSevice.Delete(product);

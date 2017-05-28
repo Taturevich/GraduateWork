@@ -8,5 +8,8 @@ namespace AimlBotWeb.Features.Categories
 
         [DisplayName("Имя")]
         public string Name { get; set; }
+
+        [DisplayName("Фото")]
+        public string ImageUrl { get; set; }
     }
 }

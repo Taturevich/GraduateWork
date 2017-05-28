@@ -21,7 +21,7 @@ namespace AimlBotWeb.Features.Categories
         [OutputCache(Duration = 10, Location = OutputCacheLocation.Client)]
         public async Task<ActionResult> All()
         {
-            var products = await _categoryService.GetAll();
+            var products = await _categoryService.GetAll().ConfigureAwait(false);
 
             var categoryModels = products.Select(Mapper.Map<CategoryModel>);
 
@@ -29,10 +29,10 @@ namespace AimlBotWeb.Features.Categories
         }
 
         [HttpGet]
-        [OutputCache(Duration = 10, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 5, Location = OutputCacheLocation.Client)]
         public async Task<ActionResult> Update(int id)
         {
-            var category = await _categoryService.GetById(id) ?? new Category();
+            var category = await _categoryService.GetById(id).ConfigureAwait(false) ?? new Category();
             var model = Mapper.Map<CategoryModel>(category);
             return View(model);
         }
@@ -42,22 +42,22 @@ namespace AimlBotWeb.Features.Categories
         {
             var category = Mapper.Map<Category>(model);
 
-            await _categoryService.Update(category);
+            await _categoryService.Update(category).ConfigureAwait(false);
 
             return RedirectToAction(nameof(Update));
         }
 
         [HttpGet]
-        [OutputCache(Duration = 10, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 5, Location = OutputCacheLocation.Client)]
         public async Task<ActionResult> Details(int id)
         {
-            var category = await _categoryService.GetById(id) ?? new Category();
+            var category = await _categoryService.GetById(id).ConfigureAwait(false) ?? new Category();
             var model = Mapper.Map<CategoryModel>(category);
             return View(model);
         }
 
         [HttpGet]
-        [OutputCache(Duration = 10, Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 5, Location = OutputCacheLocation.Client)]
         public ActionResult Add()
         {
             return View(new CategoryModel());
@@ -69,7 +69,7 @@ namespace AimlBotWeb.Features.Categories
         {
             var category = Mapper.Map<Category>(model);
 
-            await _categoryService.Add(category);
+            await _categoryService.Add(category).ConfigureAwait(false);
 
             return RedirectToAction(nameof(All));
         }
@@ -78,10 +78,10 @@ namespace AimlBotWeb.Features.Categories
         [OutputCache(Duration = 10, Location = OutputCacheLocation.Client)]
         public async Task<ActionResult> Delete(int id)
         {
-            var category = await _categoryService.GetById(id);
+            var category = await _categoryService.GetById(id).ConfigureAwait(false);
             if (category != null)
             {
-                await _categoryService.Delete(category);
+                await _categoryService.Delete(category).ConfigureAwait(false);
             }
 
             return RedirectToAction(nameof(All));

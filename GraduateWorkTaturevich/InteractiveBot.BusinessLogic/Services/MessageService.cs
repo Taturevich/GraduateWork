@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using BusinessLogic.BotConfiguration.QueryDomainBuilder;
 using BusinessLogic.Entities.FactoryDomain;
 using BusinessLogic.Entities.Infrastructure;
@@ -12,7 +13,7 @@ namespace BusinessLogic.Services
 {
     public interface IMessageService : IEntityServiceBase<Message>
     {
-        ReplyContainer TryParseToDatabaseQuery(string[] words);
+        Task<ReplyContainer> TryParseToDatabaseQuery(string[] words);
     }
 
     internal class MessageService : EntityServiceBase<Message>, IMessageService
@@ -30,45 +31,48 @@ namespace BusinessLogic.Services
             _entityMatcherProvider = provider;
         }
 
-        public ReplyContainer TryParseToDatabaseQuery(string[] words)
+        public Task<ReplyContainer> TryParseToDatabaseQuery(string[] words)
         {
-            var container = new ReplyContainer();
-            foreach (var word in words)
+            return Task.Run(() =>
             {
-                var matcher = _entityMatcherProvider.TryGetEntityTypeByTag(word);
-                if (matcher != null)
+                var container = new ReplyContainer();
+                foreach (var word in words)
                 {
-                    if (matcher.GetEntityType == typeof(Product))
+                    var matcher = _entityMatcherProvider.TryGetEntityTypeByTag(word);
+                    if (matcher != null)
                     {
-                        var commandresult = GetListOfProducts(matcher);
-                        container
-                            .DomainDataList
-                            .AddRange(
-                                commandresult
-                                .Select(x => new DisplayedObject
-                                {
-                                    DisplayInformation = x.ToString(),
-                                    ImageName = x.ImageName
-                                }));
-                    }
+                        if (matcher.GetEntityType == typeof(Product))
+                        {
+                            var commandresult = GetListOfProducts(matcher);
+                            container
+                                .DomainDataList
+                                .AddRange(
+                                    commandresult
+                                        .Select(x => new DisplayedObject
+                                        {
+                                            DisplayInformation = x.ToString(),
+                                            ImageName = x.ImageName
+                                        }));
+                        }
 
-                    if (matcher.GetEntityType == typeof(Category))
-                    {
-                        var commandresult = GetListOfCategories(matcher);
-                        container
-                            .DomainDataList
-                            .AddRange(
-                                commandresult
-                                .Select(x => new DisplayedObject
-                                {
-                                    DisplayInformation = x.ToString(),
-                                    ImageName = x.ImageName
-                                }));
+                        if (matcher.GetEntityType == typeof(Category))
+                        {
+                            var commandresult = GetListOfCategories(matcher);
+                            container
+                                .DomainDataList
+                                .AddRange(
+                                    commandresult
+                                        .Select(x => new DisplayedObject
+                                        {
+                                            DisplayInformation = x.ToString(),
+                                            ImageName = x.ImageName
+                                        }));
+                        }
                     }
                 }
-            }
 
-            return container;
+                return container;
+            });
         }
 
         private List<Product> GetListOfProducts(EntityMatcher matcher)

@@ -5,7 +5,6 @@
 }
 
 <div>
-    <h4>ProductModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -31,7 +30,12 @@
         <dd>
             @Html.DisplayFor(model => model.Specification)
         </dd>
-
+        <dt>
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </dt>
+        <dd>
+            <img src="@Model.ImagePath">
+        </dd>
     </dl>
 </div>
 <p>

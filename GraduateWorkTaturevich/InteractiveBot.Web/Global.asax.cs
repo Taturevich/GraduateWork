@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.IO;
+using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using AimlBotWeb.EventLogs;
@@ -25,9 +26,15 @@ namespace AimlBotWeb
                 cfg.CreateMap<MessageModel, Message>();
                 cfg.CreateMap<EventLog, EventLogModel>();
                 cfg.CreateMap<EventLogModel, EventLog>();
-                cfg.CreateMap<Product, ProductModel>();
+                cfg.CreateMap<Product, ProductModel>()
+                    .ForMember(dest => dest.ImagePath,
+                                opt => opt.MapFrom(src => Path
+                                    .Combine(GlobalSettings.BotContentPath, src.ImageName)));
                 cfg.CreateMap<ProductModel, Product>();
-                cfg.CreateMap<Category, CategoryModel>();
+                cfg.CreateMap<Category, CategoryModel>()
+                    .ForMember(dest => dest.ImageUrl,
+                                opt => opt.MapFrom(src => Path
+                                    .Combine(GlobalSettings.BotContentPath, src.ImageName)));
                 cfg.CreateMap<CategoryModel, Category>();
             });
         }

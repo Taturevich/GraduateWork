@@ -30,7 +30,7 @@ namespace AimlBotWeb.Features.Learning
         [OutputCache(Duration = 10, Location = OutputCacheLocation.Client)]
         public async Task<ActionResult> UserDirectory()
         {
-            var dictionary = await _botService.GetPatternsFromDirectory();
+            var dictionary = await _botService.GetPatternsFromDirectory().ConfigureAwait(false);
             var mappedDirectory = dictionary.Select(x => new BotPatternsModel
             {
                 BotTemplate = x.Key,
@@ -45,7 +45,7 @@ namespace AimlBotWeb.Features.Learning
         [ActionName("Main")]
         public async Task<ActionResult> FindText(LearnMessageModel messageModel)
         {
-            var answer = await _botService.GetAnswer(messageModel.UserTypedMessage);
+            var answer = await _botService.GetAnswer(messageModel.UserTypedMessage).ConfigureAwait(false);
             var newModel = new LearnMessageModel
             {
                 BotAnswer = answer.Text,
@@ -58,7 +58,9 @@ namespace AimlBotWeb.Features.Learning
         [Authorize]
         public async Task<ActionResult> AddAnswer(LearnMessageModel messageModel)
         {
-            await _botService.CreateAnswer(messageModel.BotAnswer, messageModel.UserTypedMessage);
+            await _botService
+                .CreateAnswer(messageModel.BotAnswer, messageModel.UserTypedMessage)
+                .ConfigureAwait(false);
 
             return RedirectToAction(nameof(Main), messageModel);
         }
