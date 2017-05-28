@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
@@ -18,9 +19,9 @@ namespace AimlBotWeb.EventLogs
         }
 
         // GET: EvenLog
-        public ActionResult All()
+        public async Task<ActionResult> All()
         {
-            var eventLogs = _eventLogService.GetAll();
+            var eventLogs = await _eventLogService.GetAll();
             var eventLogsModels = eventLogs.Select(Mapper.Map<EventLogModel>);
 
             return View(eventLogsModels);

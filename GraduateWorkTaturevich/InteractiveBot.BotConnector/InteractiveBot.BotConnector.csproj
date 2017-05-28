@@ -208,7 +208,7 @@
     <Content Include="aiml\Stories.aiml" />
     <Content Include="aiml\Test.aiml" />
     <Content Include="aiml\That.aiml" />
-    <Content Include="aiml\UserDirectory.xml" />
+    <None Include="aiml\UserDirectory.aiml" />
     <None Include="Properties\PublishProfiles\TaturevichTestBot - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

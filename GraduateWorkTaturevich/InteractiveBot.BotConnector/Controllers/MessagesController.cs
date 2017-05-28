@@ -11,6 +11,7 @@ using BusinessLogic.Services;
 using Yandex.Speller.Api;
 using Yandex.Speller.Api.DataContract;
 using System.Collections.Generic;
+using System.Linq;
 using BusinessLogic.Models;
 
 namespace TestBotConnection.Controllers
@@ -40,7 +41,7 @@ namespace TestBotConnection.Controllers
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
                 // calculate something for us to return
 
-                var correctMessage = CorrectInputMessage(activity.Text);
+                var correctMessage = await CorrectInputMessage(activity.Text);
 
                 var words = correctMessage.ToWords();
 
@@ -54,17 +55,19 @@ namespace TestBotConnection.Controllers
                     SenderType = SenderType.User
                 };
 
-                _messageService.Add(newMessage);
-                string answerText;
+                await _messageService.Add(newMessage);
                 if (container.IsContainsDomainData)
                 {
-                    var root = Request.RequestUri.GetLeftPart(UriPartial.Authority);
-                    container.DomainDataList.ForEach(async x => await ReplyToUser(x, activity, connector));
+                    var taskList = container
+                        .DomainDataList
+                        .Select(x => ReplyToUser(x, activity, connector))
+                        .ToList();
+                    await Task.WhenAll(taskList);
                 }
                 else
                 {
-                    var botAnswer = _botService.GetAnswer(activity.Text);
-                    answerText = botAnswer.Text ?? string.Empty;
+                    var botAnswer = await _botService.GetAnswer(activity.Text);
+                    var answerText = botAnswer.Text ?? string.Empty;
                     var reply = activity.CreateReply($"{answerText}");
                     await connector.Conversations.ReplyToActivityAsync(reply);
                 }
@@ -85,15 +88,16 @@ namespace TestBotConnection.Controllers
             ConnectorClient connector)
         {
             var reply = activity.CreateReply(displayedObject.DisplayInformation);
-            reply.Attachments = new List<Attachment>();
-            reply.Attachments.Add(new Attachment()
+            reply.Attachments = new List<Attachment>
             {
-                ContentUrl = Url.Content($"~/content/{displayedObject.ImageName}"),
-                ContentType = "image/png",
-                Name = $"{displayedObject.ImageName}"
-            });
+                new Attachment
+                {
+                    ContentUrl = Url.Content($"~/content/{displayedObject.ImageName}"),
+                    ContentType = "image/png",
+                    Name = $"{displayedObject.ImageName}"
+                }
+            };
             await connector.Conversations.ReplyToActivityAsync(reply);
-            await Task.Delay(1500);
         }
 
         private Activity HandleSystemMessage(Activity message)
@@ -125,26 +129,30 @@ namespace TestBotConnection.Controllers
             return null;
         }
 
-        private string CorrectInputMessage(string inputText)
+        private Task<string> CorrectInputMessage(string inputText)
         {
             var correctedmessage = inputText;
-            var speller = new YandexSpeller();
-            var result = speller.CheckText(correctedmessage, Lang.Ru | Lang.En, Options.Default, TextFormat.Plain);
-            int countErrs = result.Errors.Count;
-            if (countErrs > 0)
+            Task.Run(() =>
             {
-                for (int i = countErrs; i > 0; i--)
+                var speller = new YandexSpeller();
+                var result = speller.CheckText(correctedmessage, Lang.Ru | Lang.En, Options.Default, TextFormat.Plain);
+                int countErrs = result.Errors.Count;
+                if (countErrs > 0)
                 {
-                    var err = result.Errors[i - 1];
-
-                    if (err.Steer.Count > 0)
+                    for (int i = countErrs; i > 0; i--)
                     {
-                        correctedmessage = correctedmessage.Remove(err.Pos, err.Len);
-                        correctedmessage = correctedmessage.Insert(err.Pos, err.Steer[0]);
+                        var err = result.Errors[i - 1];
+
+                        if (err.Steer.Count > 0)
+                        {
+                            correctedmessage = correctedmessage.Remove(err.Pos, err.Len);
+                            correctedmessage = correctedmessage.Insert(err.Pos, err.Steer[0]);
+                        }
                     }
-                };
-            }
-            return correctedmessage;
+                }
+            });
+
+            return Task.FromResult(correctedmessage);
         }
     }
 }

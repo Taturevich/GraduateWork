@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.UI;
 using BusinessLogic.Services;
 
 namespace AimlBotWeb.Features.Learning
@@ -26,9 +27,10 @@ namespace AimlBotWeb.Features.Learning
         }
 
         [HttpGet]
-        public ActionResult UserDirectory()
+        [OutputCache(Duration = 10, Location = OutputCacheLocation.Client)]
+        public async Task<ActionResult> UserDirectory()
         {
-            var dictionary = _botService.GetPatternsFromDirectory();
+            var dictionary = await _botService.GetPatternsFromDirectory();
             var mappedDirectory = dictionary.Select(x => new BotPatternsModel
             {
                 BotTemplate = x.Key,
@@ -41,9 +43,9 @@ namespace AimlBotWeb.Features.Learning
         [HttpPost]
         [Authorize]
         [ActionName("Main")]
-        public ActionResult FindText(LearnMessageModel messageModel)
+        public async Task<ActionResult> FindText(LearnMessageModel messageModel)
         {
-            var answer = _botService.GetAnswer(messageModel.UserTypedMessage);
+            var answer = await _botService.GetAnswer(messageModel.UserTypedMessage);
             var newModel = new LearnMessageModel
             {
                 BotAnswer = answer.Text,

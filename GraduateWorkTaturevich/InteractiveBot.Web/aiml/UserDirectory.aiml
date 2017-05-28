@@ -26,8 +26,4 @@
     <template>Прощай</template>
     <pattern>Пока</pattern>
   </category>
-  <category>
-    <template>Меня создал Иван</template>
-    <pattern>Кто твой создатель</pattern>
-  </category>
 </aiml>

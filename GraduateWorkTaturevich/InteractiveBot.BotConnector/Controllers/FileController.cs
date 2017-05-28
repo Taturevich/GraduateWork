@@ -1,5 +1,11 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Text;
+using System.Web;
 using System.Web.Http;
+using System.Xml;
 
 namespace TestBotConnection.Controllers
 {
@@ -7,11 +13,21 @@ namespace TestBotConnection.Controllers
     {
         [HttpGet]
         [Route("api/file")]
-        public byte[] GetDirectoryFile()
+        public HttpResponseMessage GetDirectoryFile()
         {
-            var pathToUserFile = @"~\aiml\UserDirectory.xml";
+            var pathToUserFile = @"~\aiml\UserDirectory.aiml";
             pathToUserFile = System.Web.Hosting.HostingEnvironment.MapPath(pathToUserFile);
-            return File.ReadAllBytes(pathToUserFile);
+            var xmlDoc = new XmlDocument();
+            if (pathToUserFile != null)
+            {
+                xmlDoc.Load(pathToUserFile);
+                return new HttpResponseMessage
+                {
+                    Content = new StringContent(xmlDoc.OuterXml, Encoding.UTF8, "application/xml")
+                };
+            }
+
+            return new HttpResponseMessage();
         }
 
         [HttpPut]
@@ -19,7 +35,7 @@ namespace TestBotConnection.Controllers
         public async void UpdateDirectoryFile()
         {
             var bytes = await Request.Content.ReadAsByteArrayAsync();
-            var pathToUserFile = @"~\aiml\UserDirectory.xml";
+            var pathToUserFile = @"~\aiml\UserDirectory.aiml";
             pathToUserFile = System.Web.Hosting.HostingEnvironment.MapPath(pathToUserFile);
             if (pathToUserFile != null)
             {

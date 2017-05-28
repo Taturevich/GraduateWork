@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.UI;
 using AutoMapper;
@@ -19,9 +20,9 @@ namespace AimlBotWeb.Features.Products
 
         // GET: products
         [OutputCache(Duration = 10, Location = OutputCacheLocation.Client)]
-        public ActionResult All()
+        public async Task<ActionResult> All()
         {
-            var products = _productSevice.GetAll();
+            var products = await _productSevice.GetAll();
 
             var productModels = products.Select(Mapper.Map<ProductModel>);
 
@@ -30,28 +31,28 @@ namespace AimlBotWeb.Features.Products
 
         [HttpGet]
         [OutputCache(Duration = 10, Location = OutputCacheLocation.Client)]
-        public ActionResult Update(int id)
+        public async Task<ActionResult> Update(int id)
         {
-            var product = _productSevice.GetById(id) ?? new Product();
+            var product = await _productSevice.GetById(id) ?? new Product();
             var model = Mapper.Map<ProductModel>(product);
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Update(ProductModel model)
+        public async Task<ActionResult> Update(ProductModel model)
         {
             var product = Mapper.Map<Product>(model);
 
-            _productSevice.Update(product);
+            await _productSevice.Update(product);
 
             return RedirectToAction(nameof(Update));
         }
 
         [HttpGet]
         [OutputCache(Duration = 10, Location = OutputCacheLocation.Client)]
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int id)
         {
-            var message = _productSevice.GetById(id) ?? new Product();
+            var message = await _productSevice.GetById(id) ?? new Product();
             var model = Mapper.Map<ProductModel>(message);
             return View(model);
         }
@@ -65,23 +66,23 @@ namespace AimlBotWeb.Features.Products
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(ProductModel model)
+        public async Task<ActionResult> Add(ProductModel model)
         {
             var product = Mapper.Map<Product>(model);
 
-            _productSevice.Add(product);
+            await _productSevice.Add(product);
 
             return RedirectToAction(nameof(All));
         }
 
         [HttpGet]
         [OutputCache(Duration = 10, Location = OutputCacheLocation.Client)]
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            var product = _productSevice.GetById(id);
+            var product = await _productSevice.GetById(id);
             if (product != null)
             {
-                _productSevice.Delete(product);
+                await _productSevice.Delete(product);
             }
 
             return RedirectToAction(nameof(All));

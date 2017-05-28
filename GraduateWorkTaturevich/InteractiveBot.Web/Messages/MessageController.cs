@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.UI;
 using AutoMapper;
@@ -19,9 +20,9 @@ namespace AimlBotWeb.Messages
 
         // GET: Messages
         [OutputCache(Duration = 10, Location = OutputCacheLocation.Client)]
-        public ActionResult All()
+        public async Task<ActionResult> All()
         {
-            var messages = _messageService.GetAll();
+            var messages = await _messageService.GetAll();
 
             var messageModels = messages.Select(Mapper.Map<MessageModel>);
 
@@ -29,30 +30,30 @@ namespace AimlBotWeb.Messages
         }
 
         [HttpGet]
-        public ActionResult Update(string id)
+        public async Task<ActionResult> Update(string id)
         {
-            var message = _messageService
-                .GetAll()
+            var message = (await _messageService
+                .GetAll())
                 .FirstOrDefault(x => x.Id == Guid.Parse(id));
             var model = Mapper.Map<MessageModel>(message);
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Update(MessageModel model)
+        public async Task<ActionResult> Update(MessageModel model)
         {
             var message = Mapper.Map<Message>(model);
 
-            _messageService.Update(message);
+            await _messageService.Update(message);
 
             return RedirectToAction(nameof(Update));
         }
 
         [HttpGet]
-        public ActionResult Details(string id)
+        public async Task<ActionResult> Details(string id)
         {
-            var message = _messageService
-                .GetAll()
+            var message = (await _messageService
+                .GetAll())
                 .FirstOrDefault(x => x.Id == Guid.Parse(id));
             var model = Mapper.Map<MessageModel>(message);
             return View(model);
@@ -66,11 +67,11 @@ namespace AimlBotWeb.Messages
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(MessageModel model)
+        public async Task<ActionResult> Add(MessageModel model)
         {
             var message = Mapper.Map<Message>(model);
 
-            _messageService.Add(message);
+            await _messageService.Add(message);
 
             return RedirectToAction(nameof(All));
         }

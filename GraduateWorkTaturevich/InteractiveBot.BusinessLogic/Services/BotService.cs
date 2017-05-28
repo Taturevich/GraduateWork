@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
+using System.IO;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using BusinessLogic.BotConfiguration;
@@ -12,11 +13,11 @@ namespace BusinessLogic.Services
 {
     public interface IBotService : IEntityServiceBase<Bot>
     {
-        Message GetAnswer(string input);
+        Task<Message> GetAnswer(string input);
 
         Task CreateAnswer(string template, string pattern);
 
-        Dictionary<string, string> GetPatternsFromDirectory();
+        Task<Dictionary<string, string>> GetPatternsFromDirectory();
     }
 
     internal class BotService : EntityServiceBase<Bot>, IBotService
@@ -33,7 +34,7 @@ namespace BusinessLogic.Services
             _messageService = messageService;
         }
 
-        public Message GetAnswer(string input)
+        public async Task<Message> GetAnswer(string input)
         {
             var answer = new Message
             {
@@ -42,55 +43,59 @@ namespace BusinessLogic.Services
                 Text = _botInit.GetOutput(input),
                 SenderType = SenderType.Bot
             };
-            _messageService.Add(answer);
+            await Task.Run(() =>
+            {
+                _messageService.Add(answer);
+            });
 
             return answer;
         }
 
         public async Task CreateAnswer(string template, string pattern)
         {
-            await Task.Run(() =>
+            using (var httpClient = new HttpClient())
             {
-                var fileUri = _botInit.GetUserDirectoryRemoteAimlFile;
+                var fileUri = _botInit.GetUserDirectoryRemoteAimlApi;
+                var data = await httpClient.GetStringAsync(new Uri(fileUri));
+                var doc = XDocument.Parse(data);
 
-                var doc = XDocument.Load(fileUri);
                 var aimlElement = doc.Element("aiml");
                 aimlElement?.Add(new XElement("category",
                     new XElement("template", template),
                     new XElement("pattern", pattern)));
                 doc.Save(_botInit.GetUserDirectoryAimlFile);
-                using (var webClient = new WebClient())
-                {
-                    webClient.UploadFileAsync(
-                        new Uri(_botInit.GetUserDirectoryRemoteAimlApi),
-                        "PUT",
-                        new Uri(_botInit.GetUserDirectoryAimlFile).LocalPath);
-                }
-            });
+                var newData = File.ReadAllBytes(_botInit.GetUserDirectoryAimlFile);
+                await httpClient.PutAsync(new Uri(_botInit.GetUserDirectoryRemoteAimlApi),
+                    new ByteArrayContent(newData));
+            }
         }
 
-        public Dictionary<string, string> GetPatternsFromDirectory()
+        public async Task<Dictionary<string, string>> GetPatternsFromDirectory()
         {
             var resultDictionary = new Dictionary<string, string>();
-            var filePath = _botInit.GetUserDirectoryRemoteAimlFile;
-            var doc = XDocument.Load(filePath);
-            var aimlElement = doc.Element("aiml");
-            var xElements = aimlElement?.Elements("category");
-            if (xElements != null)
+
+            await Task.Run(() =>
             {
-                foreach (var category in xElements)
+                var filePath = _botInit.GetUserDirectoryRemoteAimlFile;
+                var doc = XDocument.Load(filePath);
+                var aimlElement = doc.Element("aiml");
+                var xElements = aimlElement?.Elements("category");
+                if (xElements != null)
                 {
-                    var xElement = category.Element("template");
-                    if (xElement != null)
+                    foreach (var category in xElements)
                     {
-                        var element = category.Element("pattern");
-                        if (element != null)
+                        var xElement = category.Element("template");
+                        if (xElement != null)
                         {
-                            resultDictionary.Add(xElement.Value, element.Value);
+                            var element = category.Element("pattern");
+                            if (element != null)
+                            {
+                                resultDictionary.Add(xElement.Value, element.Value);
+                            }
                         }
                     }
                 }
-            }
+            });
 
             return resultDictionary;
         }
