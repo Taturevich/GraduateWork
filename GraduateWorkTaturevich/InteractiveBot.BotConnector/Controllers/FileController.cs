@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Http;
 using System.Xml;
 
-namespace TestBotConnection.Controllers
+namespace InteractiveBot.BotConnector.Controllers
 {
     public class FileController : ApiController
     {

@@ -16,7 +16,7 @@ namespace BusinessLogic.Services
         Task<ReplyContainer> TryParseToDatabaseQuery(string[] words);
     }
 
-    internal class MessageService : EntityServiceBase<Message>, IMessageService
+    public class MessageService : EntityServiceBase<Message>, IMessageService
     {
         private readonly IDatabaseCommandContext _commandContext;
         private readonly EntityMatcherProvider _entityMatcherProvider;
@@ -75,7 +75,7 @@ namespace BusinessLogic.Services
             });
         }
 
-        private List<Product> GetListOfProducts(EntityMatcher matcher)
+        public List<Product> GetListOfProducts(EntityMatcher matcher)
         {
             var command = $"SELECT * FROM {matcher.TableName}";
             var result = _commandContext
@@ -85,7 +85,7 @@ namespace BusinessLogic.Services
             return result;
         }
 
-        private List<Category> GetListOfCategories(EntityMatcher matcher)
+        public List<Category> GetListOfCategories(EntityMatcher matcher)
         {
             var command = $"SELECT * FROM {matcher.TableName}";
             var result = _commandContext

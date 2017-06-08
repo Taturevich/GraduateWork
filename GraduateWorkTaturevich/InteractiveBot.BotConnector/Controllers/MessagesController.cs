@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BusinessLogic.Models;
 
-namespace TestBotConnection.Controllers
+namespace InteractiveBot.BotConnector.Controllers
 {
     [BotAuthentication]
     public class MessagesController : ApiController
@@ -41,11 +41,11 @@ namespace TestBotConnection.Controllers
                 var connector = new ConnectorClient(new Uri(activity.ServiceUrl));
                 // calculate something for us to return
 
-                var correctMessage = await CorrectInputMessage(activity.Text).ConfigureAwait(false);
-
+                var correctMessage = CorrectInputMessage(activity.Text);
+                
                 var words = correctMessage.ToWords();
 
-                var container = await _messageService.TryParseToDatabaseQuery(words).ConfigureAwait(false);
+                var container = await _messageService.TryParseToDatabaseQuery(words);
 
                 var newMessage = new Message
                 {
@@ -54,7 +54,7 @@ namespace TestBotConnection.Controllers
                     Text = correctMessage,
                     SenderType = SenderType.User
                 };
-                await _messageService.Add(newMessage).ConfigureAwait(false);
+                await _messageService.Add(newMessage);
 
 
                 if (container.IsContainsDomainData)
@@ -67,10 +67,10 @@ namespace TestBotConnection.Controllers
                 }
                 else
                 {
-                    var botAnswer = await _botService.GetAnswer(activity.Text).ConfigureAwait(false);
+                    var botAnswer = await _botService.GetAnswer(activity.Text);
                     var answerText = botAnswer.Text ?? string.Empty;
                     var reply = activity.CreateReply($"{answerText}");
-                    await connector.Conversations.ReplyToActivityAsync(reply).ConfigureAwait(false);
+                    await connector.Conversations.ReplyToActivityAsync(reply);
                 }
 
                 // return our reply to the user
@@ -130,32 +130,26 @@ namespace TestBotConnection.Controllers
             return null;
         }
 
-        private Task<string> CorrectInputMessage(string inputText)
+        private string CorrectInputMessage(string inputText)
         {
             var correctedmessage = inputText;
-            Task.Run(() =>
+            var speller = new YandexSpeller();
+            var result = speller.CheckText(correctedmessage, Lang.Ru | Lang.En, Options.Default, TextFormat.Plain);
+            int countErrs = result.Errors.Count;
+            if (countErrs > 0)
             {
-                var speller = new YandexSpeller();
-                var result = speller.CheckText(correctedmessage, Lang.Ru | Lang.En, Options.Default, TextFormat.Plain);
-                int countErrs = result.Errors.Count;
-                if (countErrs > 0)
+                for (int i = countErrs; i > 0; i--)
                 {
-                    for (int i = countErrs; i > 0; i--)
-                    {
-                        var err = result.Errors[i - 1];
+                    var err = result.Errors[i - 1];
 
-                        if (err.Steer.Count > 0)
-                        {
-                            correctedmessage = correctedmessage.Remove(err.Pos, err.Len);
-                            correctedmessage = correctedmessage.Insert(err.Pos, err.Steer[0]);
-                        }
+                    if (err.Steer.Count > 0)
+                    {
+                        correctedmessage = correctedmessage.Remove(err.Pos, err.Len);
+                        correctedmessage = correctedmessage.Insert(err.Pos, err.Steer[0]);
                     }
                 }
-
-                return correctedmessage;
-            });
-
-            return Task.FromResult(correctedmessage);
+            }
+            return correctedmessage;
         }
     }
 }
