@@ -1,20 +1,20 @@
-﻿using System;
+﻿using BusinessLogic.Entities.Infrastructure;
+using BusinessLogic.Enums;
+using BusinessLogic.Infrastructure.Extensions;
+using BusinessLogic.Models;
+using BusinessLogic.Services;
+using Microsoft.Bot.Connector;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using BusinessLogic.Entities.Infrastructure;
-using BusinessLogic.Enums;
-using BusinessLogic.Infrastructure.Extensions;
-using Microsoft.Bot.Connector;
-using BusinessLogic.Services;
 using Yandex.Speller.Api;
 using Yandex.Speller.Api.DataContract;
-using System.Collections.Generic;
-using System.Linq;
-using BusinessLogic.Models;
 
-namespace InteractiveBot.BotConnector.Controllers
+namespace TestBotConnection.Controllers
 {
     [BotAuthentication]
     public class MessagesController : ApiController
@@ -42,7 +42,7 @@ namespace InteractiveBot.BotConnector.Controllers
                 // calculate something for us to return
 
                 var correctMessage = CorrectInputMessage(activity.Text);
-                
+
                 var words = correctMessage.ToWords();
 
                 var container = await _messageService.TryParseToDatabaseQuery(words);
@@ -101,7 +101,7 @@ namespace InteractiveBot.BotConnector.Controllers
             await connector.Conversations.ReplyToActivityAsync(reply);
         }
 
-        private Activity HandleSystemMessage(Activity message)
+        private void HandleSystemMessage(Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)
             {
@@ -126,8 +126,6 @@ namespace InteractiveBot.BotConnector.Controllers
             else if (message.Type == ActivityTypes.Ping)
             {
             }
-
-            return null;
         }
 
         private string CorrectInputMessage(string inputText)

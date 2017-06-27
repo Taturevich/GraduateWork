@@ -1,13 +1,10 @@
-﻿using System;
-using System.IO;
-using System.Net;
+﻿using System.IO;
 using System.Net.Http;
 using System.Text;
-using System.Web;
 using System.Web.Http;
 using System.Xml;
 
-namespace InteractiveBot.BotConnector.Controllers
+namespace TestBotConnection.Controllers
 {
     public class FileController : ApiController
     {
